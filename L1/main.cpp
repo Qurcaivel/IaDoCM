@@ -10,6 +10,7 @@
 #include <chrono>
 #include <cctype>
 #include <limits>
+#include <utility>
 
 inline void do_print(){
     auto power_status = System::power_status();
@@ -32,6 +33,7 @@ inline void do_print(){
                             case BATTERY: return "BAT";
                             case AC: return "AC";
                             case UNKNOWN: return "Unknown";
+                            default: std::unreachable();
                         }
                      }(power_info.source()) << '\n';
 
@@ -50,6 +52,7 @@ inline void do_print(){
                          switch(bs){
                              case OFF: return "Off";
                              case ON: return "On";
+                             default: std::unreachable();
                          }
                      }(power_info.battery_saver()) << std::endl;
 
@@ -66,6 +69,7 @@ inline void do_print(){
                                 switch(bt){
                                     case NONRECHARGEABLE: return "Non rechargeable";
                                     case RECHARGEABLE: return "Rechargeable";
+                                    default: std::unreachable();
                                 }
                             }(bi.technology()) << "\n"
                          "\t\tChemistry: " << bi.chemistry() << "\n";
